@@ -58,11 +58,6 @@ const postToDialogflow = (req) => {
       uri: "https://bots.dialogflow.com/line/00a963e0-b8e1-435f-affe-92a6cb6be622/webhook",
       headers: req.headers,
       body: JSON.stringify(req.body)
-    },function(err, httpResponse, body){
-        if (err) {
-            return console.error('upload failed:', err);
-          }
-        console.log('Upload successful!  Server responded with:', httpResponse, body);
     });
   };
 
