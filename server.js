@@ -27,7 +27,7 @@ app.post('/webhook', (req, res) => {
         reply(req.body);
     }else{
         if (req.body.events[0].message.type !== 'text') {
-            reply(req.body);
+            // reply(req.body);
         } else {
             postToDialogflow(req);
         }
