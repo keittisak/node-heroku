@@ -11,6 +11,10 @@ app.get("/", (req, res) => {
     res.json(responseObject);
 });
 
+app.post('/webhook', (req, res) => {
+    return req;
+});
+
 app.listen(port, () => {
    console.log("application is listening on:", port);
 });
