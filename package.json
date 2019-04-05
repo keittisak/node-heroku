@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/keittisak/node-heroku#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "save": "^2.3.3"
   }
 }
