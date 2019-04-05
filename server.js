@@ -23,8 +23,6 @@ app.get("/", (req, res) => {
 });
 
 app.post('/webhook', (req, res) => {
-    res.status(201).json(req.body)
-    return 
     if (req.body.events[0].type !== 'message') {
         reply(req.body);
     }else{
