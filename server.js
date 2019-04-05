@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
 app.post('/webhook', (req, res) => {
     if (req.body.events[0].type !== 'message') {
         reply(req.body);
+        return
     }else{
         if (req.body.events[0].message.type !== 'text') {
             // reply(req.body);
