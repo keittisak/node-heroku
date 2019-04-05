@@ -19,11 +19,8 @@ app.get("/", (req, res) => {
 });
 
 app.post('/webhook', (req, res) => {
-    var responseObject = {
-        status: true,
-        data: { text: "hello keittisak" }
-    }
-    return res.json(responseObject);
+
+    return req.body
     if (req.body.events[0].type !== 'message') {
         reply(req.body);
     }else{
