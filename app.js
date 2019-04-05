@@ -6,7 +6,7 @@ var port = process.env.PORT || 5000;
 app.get("/", (req, res) => {
     var responseObject = {
         status: true,
-        data: { text: "hello" }
+        data: { text: "hello keittisak" }
     }
     res.json(responseObject);
 });
