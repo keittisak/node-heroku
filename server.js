@@ -1,7 +1,11 @@
 const express = require("express");
 const request = require('request');
-
+const bodyParser = require('body-parser')
 const app = express();
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
 const LINE_HEADER = {
   'Content-Type': 'application/json',
@@ -19,11 +23,8 @@ app.get("/", (req, res) => {
 });
 
 app.post('/webhook', (req, res) => {
-    var responseObject = {
-        status: true,
-        data: { text: "hello keittisak" }
-    }
-    return res.json(responseObject);
+    res.status(201).json(req.body)
+    return 
     if (req.body.events[0].type !== 'message') {
         reply(req.body);
     }else{
