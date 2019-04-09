@@ -24,13 +24,27 @@ app.get("/", (req, res) => {
 
 app.post('/webhook', (req, res) => {
     if (req.body.events[0].type !== 'message') {
-        postToRocketbot(req);
+        reply(req.body);
     }else{
         if (req.body.events[0].message.type !== 'text') {
-            postToRocketbot(req);
+            reply(req.body);
         } else {
             // postToDialogflow(req);
-            postToRocketbot(req);
+            const result = postToRocketbot(req);
+            request({
+                method : `POST`,
+                uri : `${LINE_MESSAGING_API}/reply`,
+                headers : LINE_HEADER,
+                body : JSON.stringify({
+                    replyToken : req.body.events[0].replyToken,
+                    messages: [{
+                        type : 'text',
+                        // text : bodyResponse.events[0].message.text
+                        text : JSON.stringify(result)
+                    }]
+                })
+            })
+
         }
     }
     return res.status(200).send(req.method)
