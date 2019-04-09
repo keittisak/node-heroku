@@ -30,7 +30,11 @@ app.post('/webhook', (req, res) => {
             reply(req.body);
         } else {
             // postToDialogflow(req);
-            const result = postToRocketbot(req);
+            setTimeout(function(){
+                const result = postToRocketbot(req);
+            },5000)
+            
+            
             request({
                 method : `POST`,
                 uri : `${LINE_MESSAGING_API}/reply`,
@@ -85,6 +89,7 @@ const postToDialogflow = (req) => {
       headers: req.headers,
       body: JSON.stringify(req.body)
     });
+
   };
 
 
