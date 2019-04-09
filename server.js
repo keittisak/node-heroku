@@ -29,8 +29,8 @@ app.post('/webhook', (req, res) => {
         if (req.body.events[0].message.type !== 'text') {
             reply(req.body);
         } else {
-            postToDialogflow(req);
-            // postToRocketbot(req);
+            // postToDialogflow(req);
+            postToRocketbot(req);
         }
     }
     return res.status(200).send(req.method)
