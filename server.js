@@ -30,6 +30,7 @@ app.post('/webhook', (req, res) => {
             reply(req.body);
         } else {
             postToDialogflow(req);
+            // postToRocketbot(req);
         }
     }
     return res.status(200).send(req.method)
@@ -53,6 +54,16 @@ const reply = (bodyResponse) => {
 };
 
 const postToDialogflow = (req) => {
+    req.headers.host = "bots.dialogflow.com";
+    return request({
+      method: "POST",
+      uri: "https://bots.dialogflow.com/line/00a963e0-b8e1-435f-affe-92a6cb6be622/webhook",
+      headers: req.headers,
+      body: JSON.stringify(req.body)
+    });
+  };
+
+  const postToRocketbot = (req) => {
     req.headers.host = "app.rocketbots.io";
     return request({
       method: "POST",
