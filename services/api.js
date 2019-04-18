@@ -5,12 +5,7 @@ const LINE_HEADER = {
   'Authorization': `Bearer gqgEkKz8kKUIJ9XwgmBhK3ZbPnzK2W4H6XfBmLMXZ8UJjzmCy9NSzldWU0XFDYK9+Oz6tpXagzwmtOvRfZvfpYFsIe51T9vX2ljZ79r2xu7UYZj/nyXgUdstJ6qc0aiFAUzQXf303D3Tx8Uq4DcV5QdB04t89/1O/w1cDnyilFU=`
 };
 
-exports.reply = (bodyResponse, text = null) => {
-    const messagesText = text;
-    if(text === null)
-        {
-            messagesText = JSON.stringify(bodyResponse)
-        }
+exports.reply = (bodyResponse) => {
     return request({
         method : `POST`,
         uri : `${LINE_MESSAGING_API}/reply`,
@@ -20,7 +15,7 @@ exports.reply = (bodyResponse, text = null) => {
             messages: [{
                 type : 'text',
                 // text : bodyResponse.events[0].message.text
-                text : messagesText
+                text : JSON.stringify(bodyResponse)
             }]
         })
     })
