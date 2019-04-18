@@ -5,7 +5,7 @@ const LINE_HEADER = {
   'Authorization': `Bearer gqgEkKz8kKUIJ9XwgmBhK3ZbPnzK2W4H6XfBmLMXZ8UJjzmCy9NSzldWU0XFDYK9+Oz6tpXagzwmtOvRfZvfpYFsIe51T9vX2ljZ79r2xu7UYZj/nyXgUdstJ6qc0aiFAUzQXf303D3Tx8Uq4DcV5QdB04t89/1O/w1cDnyilFU=`
 };
 
-const reply = (bodyResponse, text = null) => {
+exports.reply = (bodyResponse, text = null) => {
     const messagesText = text;
     if(text === null)
         {
@@ -26,7 +26,7 @@ const reply = (bodyResponse, text = null) => {
     })
 };
 
-const postToDialogflow = (req) => {
+exports.postToDialogflow = (req) => {
     req.headers.host = "bots.dialogflow.com";
     return request({
       method: "POST",
@@ -36,7 +36,7 @@ const postToDialogflow = (req) => {
     });
   };
 
-  const postToRocketbot = (req) => {
+exports.postToRocketbot = (req) => {
     req.headers.host = "app.rocketbots.io";
     return request({
       method: "POST",
