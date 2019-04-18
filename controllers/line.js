@@ -9,10 +9,10 @@ exports.webhook = async (req, res)=>{
             } else {
                 var response = await api.postToDialogflow(req);
                 // var response = await api.postToRocketbot(req);
-                api.reply(req.body, response);
+                var result = await api.reply(req.body, response);
             }
         }
-        
+        res.status(200).end();
     } catch (error) {
         console.error(error);
         res.status(500).end();
