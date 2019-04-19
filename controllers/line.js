@@ -7,9 +7,11 @@ exports.webhook = async (req, res)=>{
             if (req.body.events[0].message.type !== 'text') {
                 var response = await api.reply(req.body);
             } else {
-                var response = await api.postToDialogflow(req);
+                var response = await api.postToDialogflow(req).then(function (response) {
+                    var result = await api.push(req.body, 'xxx');
+                })
                 // var response = await api.postToRocketbot(req);
-                var result = await api.push(req.body, 'xxx');
+                
             }
         }
         res.status(200).end();
