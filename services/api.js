@@ -5,11 +5,26 @@ const LINE_HEADER = {
   'Authorization': `Bearer gqgEkKz8kKUIJ9XwgmBhK3ZbPnzK2W4H6XfBmLMXZ8UJjzmCy9NSzldWU0XFDYK9+Oz6tpXagzwmtOvRfZvfpYFsIe51T9vX2ljZ79r2xu7UYZj/nyXgUdstJ6qc0aiFAUzQXf303D3Tx8Uq4DcV5QdB04t89/1O/w1cDnyilFU=`
 };
 
-exports.reply = (bodyResponse, text = 0) => {
+exports.push = (resBody, messages = "") => {
+    return request({
+        method : `POST`,
+        uri : `${LINE_MESSAGING_API}/push`,
+        headers : LINE_HEADER,
+        body : JSON.stringify({
+            to : resBody.events[0].source.userId,
+            messages: [{
+                type : 'text',
+                text : messages
+            }]
+        })
+    })
+}
+
+exports.reply = (resBody, text = 0) => {
     var messagesText = JSON.stringify(text);
     if(!text)
         {
-            messagesText = JSON.stringify(bodyResponse)
+            messagesText = JSON.stringify(resBody)
         }
     
     return request({
@@ -17,10 +32,10 @@ exports.reply = (bodyResponse, text = 0) => {
         uri : `${LINE_MESSAGING_API}/reply`,
         headers : LINE_HEADER,
         body : JSON.stringify({
-            replyToken : bodyResponse.events[0].replyToken,
+            replyToken : resBody.events[0].replyToken,
             messages: [{
                 type : 'text',
-                // text : bodyResponse.events[0].message.text
+                // text : resBody.events[0].message.text
                 text : messagesText
             }]
         })
