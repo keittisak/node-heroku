@@ -7,9 +7,8 @@ exports.webhook = async (req, res)=>{
             if (req.body.events[0].message.type !== 'text') {
                 var response = await api.reply(req.body);
             } else {
-                var response = await api.postToDialogflow(req).then(function (response) {
-                    var result = await api.push(req.body, 'xxx');
-                })
+                var response = await api.postToDialogflow(req);
+                var resPush = await api.push(req.body.events[0].source.userId, response);
                 // var response = await api.postToRocketbot(req);
                 
             }
