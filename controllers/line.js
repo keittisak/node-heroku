@@ -8,8 +8,7 @@ exports.webhook = async (req, res)=>{
                 var response = await api.reply(req.body);
             } else {
                 var response = await api.postToDialogflow(req);
-                await setTimeout(()=>{}, 3000);
-                await api.push(req.body.events[0].source.userId, JSON.stringify(response));
+                // await api.push(req.body.events[0].source.userId, 'xxx');
                 // var response = await api.postToRocketbot(req);
                 
             }
